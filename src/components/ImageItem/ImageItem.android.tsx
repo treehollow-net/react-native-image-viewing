@@ -24,6 +24,7 @@ import usePanResponder from "../../hooks/usePanResponder";
 import { getImageStyles, getImageTransform } from "../../utils";
 import { ImageSource } from "../../@types";
 import { ImageLoading } from "./ImageLoading";
+import FastImage from "react-native-fast-image";
 
 const SWIPE_CLOSE_OFFSET = 75;
 const SWIPE_CLOSE_VELOCITY = 1.75;
@@ -131,12 +132,19 @@ const ImageItem = ({
         onScrollEndDrag,
       })}
     >
-      <Animated.Image
+      <Animated.View
         {...panHandlers}
-        source={imageSrc}
         style={imageStylesWithOpacity}
-        onLoad={onLoaded}
-      />
+      >
+        <FastImage
+          source={{ uri: imageSrc.uri }}
+          style={{
+            width: imageStylesWithOpacity.width,
+            height: imageStylesWithOpacity.height
+          }}
+          onLoad={onLoaded}
+        />
+      </Animated.View>
       {(!isLoaded || !imageDimensions) && <ImageLoading />}
     </ScrollView>
   );

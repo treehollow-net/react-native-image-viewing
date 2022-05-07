@@ -6,7 +6,7 @@
  *
  */
 
-import { ImageURISource, ImageRequireSource } from "react-native";
+import { ImageURISource } from "react-native";
 
 export type Dimensions = {
   width: number;
@@ -18,4 +18,4 @@ export type Position = {
   y: number;
 };
 
-export type ImageSource = ImageURISource | ImageRequireSource;
+export type ImageSource = ImageURISource;

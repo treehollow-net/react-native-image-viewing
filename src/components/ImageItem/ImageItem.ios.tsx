@@ -26,6 +26,7 @@ import useImageDimensions from "../../hooks/useImageDimensions";
 import { getImageStyles, getImageTransform } from "../../utils";
 import { ImageSource } from "../../@types";
 import { ImageLoading } from "./ImageLoading";
+import FastImage from "react-native-fast-image";
 
 const SWIPE_CLOSE_OFFSET = 75;
 const SWIPE_CLOSE_VELOCITY = 1.55;
@@ -136,11 +137,18 @@ const ImageItem = ({
           onLongPress={onLongPressHandler}
           delayLongPress={delayLongPress}
         >
-          <Animated.Image
-            source={imageSrc}
+          <Animated.View
             style={imageStylesWithOpacity}
-            onLoad={() => setLoaded(true)}
-          />
+          >
+            <FastImage
+              source={{uri: imageSrc.uri}}
+              style={{
+                width: imageStylesWithOpacity.width,
+                height: imageStylesWithOpacity.height
+              }}
+              onLoad={() => setLoaded(true)}
+            />
+          </Animated.View>
         </TouchableWithoutFeedback>
       </ScrollView>
     </View>
